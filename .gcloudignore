@@ -1,0 +1,18 @@
+node_modules/
+.git/
+
+# Frontend
+services/frontend/node_modules/
+services/frontend/.next/
+services/frontend/.env.local
+
+# Backend
+services/backend/node_modules/
+services/backend/.env
+
+# Matcher
+services/matcher/build/
+
+# Misc
+**/*.log
+.env*

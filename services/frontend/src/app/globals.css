@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================
+   DESIGN TOKENS — Midnight Slate
+=========================== */
+:root {
+  --bg-primary: #070A12;
+  --bg-surface: rgba(17, 24, 39, 0.72);
+  --accent-primary: #6366F1; /* indigo-500 */
+  --accent-secondary: #22D3EE; /* cyan-400 */
+  --accent-warning: #FFB800;
+  --accent-critical: #FF4444;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A0ADB8;
+  --border-glow: rgba(99, 102, 241, 0.18);
+}
+
+/* ===========================
+   BASE STYLES
+=========================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  background-attachment: fixed;
+  font-family: 'Inter', -apple-system, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===========================
+   GLASS PANELS
+=========================== */
+.glass-panel {
+  background: var(--bg-surface);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(99, 102, 241, 0.14);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+.glass-panel:hover {
+  border-color: rgba(99, 102, 241, 0.22);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.12);
+}
+
+/* ===========================
+   PREMIUM BUTTON
+=========================== */
+.premium-button {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: #070A12;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border-radius: 50px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 10px 36px rgba(99, 102, 241, 0.28);
+}
+.premium-button:hover {
+  box-shadow: 0 14px 44px rgba(99, 102, 241, 0.38);
+  transform: translateY(-2px);
+}
+.premium-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.22);
+}
+
+/* ===========================
+   GRADIENT TEXT
+=========================== */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 55%, #FFFFFF 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ===========================
+   AURORA GLOW
+=========================== */
+.aurora-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    rgba(99, 102, 241, 0.035) 60deg,
+    transparent 120deg,
+    rgba(34, 211, 238, 0.03) 180deg,
+    transparent 240deg,
+    rgba(99, 102, 241, 0.03) 300deg,
+    transparent 360deg
+  );
+  animation: aurora-spin 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes aurora-spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* ===========================
+   CARD HOVER LIFT
+=========================== */
+.card-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 66px rgba(99, 102, 241, 0.12);
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #00FF88; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #00C4A7; }
+
+/* ===========================
+   SELECTION
+=========================== */
+::selection {
+  background: rgba(0, 255, 136, 0.3);
+  color: #fff;
+}
+
+/* ===========================
+   FOCUS RINGS
+=========================== */
+*:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, 0.65);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ===========================
+   OVERRIDES (normalize selectors)
+=========================== */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-secondary); }
+
+/* Legacy selectors from earlier versions (keep in sync). */
+:::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 999px; }
+:::-webkit-scrollbar-thumb:hover { background: var(--accent-secondary); }
+
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: #fff;
+}
+
+/* Legacy selector from earlier versions (keep in sync). */
+:::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: #fff;
+}
+
+*:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, 0.65);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+

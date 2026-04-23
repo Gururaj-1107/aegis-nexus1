@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pgvector(map: "vector")]
+}
+
+model NGOCenter {
+  center_id      String   @id @default(uuid())
+  name           String
+  contact_number String?
+  lat            Float
+  lng            Float
+  reports        Report[]
+}
+
+model Volunteer {
+  volunteer_id String             @id @default(uuid())
+  first_name   String
+  last_name    String
+  phone        String
+  current_lat  Float
+  current_lng  Float
+  status       String             @default("AVAILABLE")
+  skills       VolunteerSkill[]
+  dispatches   Dispatch[]
+}
+
+model Skill {
+  skill_id         String             @id @default(uuid())
+  skill_name       String             @unique
+  volunteer_skills VolunteerSkill[]
+  needs            Need[]
+}
+
+// BCNF Many-to-Many strict enforcement
+model VolunteerSkill {
+  volunteer_id String
+  skill_id     String
+  volunteer    Volunteer @relation(fields: [volunteer_id], references: [volunteer_id], onDelete: Cascade)
+  skill        Skill     @relation(fields: [skill_id], references: [skill_id], onDelete: Cascade)
+
+  @@id([volunteer_id, skill_id])
+}
+
+model Report {
+  report_id     String     @id @default(uuid())
+  center_id     String?
+  center        NGOCenter? @relation(fields: [center_id], references: [center_id])
+  description   String?
+  urgency_level String     // LOW, MEDIUM, CRITICAL
+  timestamp     DateTime   @default(now())
+  needs         Need[]
+}
+
+model Need {
+  need_id           String     @id @default(uuid())
+  report_id         String
+  report            Report     @relation(fields: [report_id], references: [report_id], onDelete: Cascade)
+  skill_id          String
+  skill             Skill      @relation(fields: [skill_id], references: [skill_id])
+  quantity_required Int
+  status            String     @default("PENDING") // PENDING, FULFILLED
+  dispatches        Dispatch[]
+}
+
+model Dispatch {
+  dispatch_id   String    @id @default(uuid())
+  need_id       String
+  need          Need      @relation(fields: [need_id], references: [need_id], onDelete: Cascade)
+  volunteer_id  String
+  volunteer     Volunteer @relation(fields: [volunteer_id], references: [volunteer_id], onDelete: Cascade)
+  dispatched_at DateTime  @default(now())
+  eta_minutes   Int?
+  status        String    @default("EN_ROUTE") // EN_ROUTE, ARRIVED, COMPLETED
+}
+
+model KnowledgeBase {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  metadata  Json?
+  embedding Unsupported("vector(768)")?
+}
+
+model Announcement {
+  id         String   @id @default(uuid())
+  title      String
+  content    String
+  priority   String   @default("NORMAL") // NORMAL, URGENT, CRITICAL
+  created_at DateTime @default(now())
+  expires_at DateTime?
+  admin_id   String?
+}
+
+model Notification {
+  id         String   @id @default(uuid())
+  user_email String
+  message    String
+  type       String   @default("INFO") // INFO, WARNING, ALERT
+  is_read    Boolean  @default(false)
+  created_at DateTime @default(now())
+}
