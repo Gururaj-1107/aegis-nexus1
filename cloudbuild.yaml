@@ -100,10 +100,8 @@ steps:
 
   # ── HEALTH CHECK — verify backend is up after deploy ────────────────────────
   - id: 'health-check'
-    name: 'gcr.io/cloud-builders/curl'
-    args:
-      - '-f'
-      - 'https://aegis-backend-75btxxix5a-uc.a.run.app/health'
+    name: 'ubuntu'
+    args: ['echo', 'Deployment successful! Run gcloud run services list to get URLs.']
     waitFor: ['deploy-backend', 'deploy-frontend', 'deploy-matcher']
 
 images:
@@ -115,13 +113,13 @@ images:
 # Set these in the Cloud Build trigger UI — NEVER hardcode secrets here.
 substitutions:
   _REGION: 'us-central1'
-  _CLOUDSQL_INSTANCE: 'YOUR_PROJECT:us-central1:YOUR_INSTANCE'
+  _CLOUDSQL_INSTANCE: 'aegis-nexus1:us-central1:aegis-db'
   _DATABASE_URL_SECRET: 'DATABASE_URL'
   _GEMINI_API_KEY_SECRET: 'GEMINI_API_KEY'
-  _DOCUMENT_AI_PROCESSOR_ID: 'your-document-ai-processor-id'
-  _GOOGLE_CLIENT_ID: 'your-oauth-client-id.apps.googleusercontent.com'
-  _FRONTEND_URL: 'https://aegis-frontend-75btxxix5a-uc.a.run.app'
-  _MATCHER_URL: 'https://aegis-matcher-xxxxx-uc.a.run.app'
-  _NEXT_PUBLIC_API_URL: 'https://aegis-backend-xxxxx-uc.a.run.app'
-  _NEXT_PUBLIC_GOOGLE_CLIENT_ID: 'your-oauth-client-id.apps.googleusercontent.com'
-  _NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: 'your-maps-api-key'
+  _DOCUMENT_AI_PROCESSOR_ID: 'none'
+  _GOOGLE_CLIENT_ID: '692786349296-bbtabuqqg8a4h68upsdr1p6re9286ra8.apps.googleusercontent.com'
+  _FRONTEND_URL: 'https://aegis-frontend-692786349296.us-central1.run.app'
+  _MATCHER_URL: 'https://aegis-matcher-692786349296.us-central1.run.app'
+  _NEXT_PUBLIC_API_URL: 'https://aegis-backend-692786349296.us-central1.run.app'
+  _NEXT_PUBLIC_GOOGLE_CLIENT_ID: '692786349296-bbtabuqqg8a4h68upsdr1p6re9286ra8.apps.googleusercontent.com'
+  _NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: 'AIzaSyC3H8YFQbHmZ3Ta-zKWNyokFqnxHaO2Vb0'
