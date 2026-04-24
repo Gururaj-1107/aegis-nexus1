@@ -19,7 +19,7 @@
 
 <br/>
 
-**[🌐 Live Platform](https://aegis-frontend-692786349296.us-central1.run.app) · [🔌 Backend API](https://aegis-backend-692786349296.us-central1.run.app/health) · [📽️ Demo Video](#demo)**
+**[🌐 Live Platform](https://aegis-frontend-692786349296.us-central1.run.app) · [🔌 Backend API](https://aegis-backend-692786349296.us-central1.run.app/health) · [📽️ Demo Video](https://drive.google.com/file/d/1svMxEckyhTNAFTzlaYASAOP8MxRtpJaJ/view?usp=sharing)**
 
 </div>
 
