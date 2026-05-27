@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Bell, User, Shield, LogOut, Settings, ChevronDown, BarChart3 } from 'lucide-react';
+import { Bell, User, Shield, LogOut, Settings, ChevronDown, BarChart3, Menu, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { apiFetch } from '@/lib/api';
 
@@ -26,7 +26,12 @@ function AegisLogo() {
   );
 }
 
-export default function Header() {
+interface HeaderProps {
+  onToggleSidebar: () => void;
+  onToggleSearch?: () => void;
+}
+
+export default function Header({ onToggleSidebar, onToggleSearch }: HeaderProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [userName, setUserName] = useState('Commander');
@@ -81,14 +86,28 @@ export default function Header() {
       className="sticky top-0 z-50 flex justify-between items-center py-3 px-6 backdrop-blur-2xl bg-[#070A12]/80"
       style={{ borderBottom: '1px solid rgba(99,102,241,0.12)', boxShadow: '0 4px 30px rgba(0,0,0,0.5)' }}
     >
-      {/* Logo */}
-      <motion.div className="flex items-center gap-3 cursor-pointer group" onClick={() => router.push('/')}
-        whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-        <AegisLogo />
-        <span className="font-heading text-lg font-extrabold tracking-[0.15em] gradient-text hidden sm:block">
-          AEGIS NEXUS
-        </span>
-      </motion.div>
+      {/* Left section: Menu + Logo */}
+      <div className="flex items-center gap-2">
+        {/* Sidebar toggle button */}
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={onToggleSidebar}
+          className="p-2.5 rounded-xl hover:bg-white/10 transition-colors bg-white/5 border border-white/5 hover:border-[#6366F1]/20"
+          aria-label="Toggle sidebar"
+        >
+          <Menu className="w-5 h-5 text-gray-300" />
+        </motion.button>
+
+        {/* Logo */}
+        <motion.div className="flex items-center gap-3 cursor-pointer group" onClick={() => router.push('/')}
+          whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+          <AegisLogo />
+          <span className="font-heading text-lg font-extrabold tracking-[0.15em] gradient-text hidden sm:block">
+            AEGIS NEXUS
+          </span>
+        </motion.div>
+      </div>
 
       {/* Navigation */}
       <nav className="hidden lg:flex items-center gap-1 bg-white/5 p-1 rounded-full backdrop-blur-md">
@@ -112,6 +131,20 @@ export default function Header() {
 
       {/* Right side */}
       <div className="flex items-center gap-3">
+        {/* Search shortcut */}
+        {onToggleSearch && (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onToggleSearch}
+            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 hover:border-[#6366F1]/20 text-gray-400 hover:text-gray-200 transition-all text-xs"
+          >
+            <Search className="w-3.5 h-3.5" />
+            <span>Search</span>
+            <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] font-mono font-bold text-gray-500">Ctrl K</kbd>
+          </motion.button>
+        )}
+
         {/* Online indicator */}
         <div className="hidden md:flex items-center gap-2 text-[#6366F1] px-3 py-1.5 rounded-full text-xs font-bold tracking-widest bg-[#6366F1]/10 border border-[#6366F1]/20">
           <span className="w-2 h-2 rounded-full bg-[#6366F1] animate-pulse shadow-[0_0_10px_rgba(99,102,241,0.75)]" />

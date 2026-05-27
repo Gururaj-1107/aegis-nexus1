@@ -38,7 +38,7 @@ export default function AnnouncementsPage() {
     fetchAnnouncements();
   };
 
-  const borderColor = (p: string) => p === 'CRITICAL' ? 'border-l-[#FF4444]' : p === 'URGENT' ? 'border-l-[#FFB800]' : 'border-l-[#00FF88]';
+  const borderColor = (p: string) => p === 'CRITICAL' ? 'border-l-[#FF4444]' : p === 'URGENT' ? 'border-l-[#FFB800]' : 'border-l-[#6366F1]';
   const PriorityIcon = (p: string) => p === 'CRITICAL' ? AlertCircle : p === 'URGENT' ? AlertTriangle : Info;
 
   return (
@@ -58,15 +58,15 @@ export default function AnnouncementsPage() {
         <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
           className="glass-panel p-6 space-y-4">
           <input value={title} onChange={e => setTitle(e.target.value)} placeholder="Title"
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#00FF88]/30" />
+            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#6366F1]/30" />
           <textarea value={content} onChange={e => setContent(e.target.value)} placeholder="Content..."
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm h-24 resize-none focus:outline-none focus:border-[#00FF88]/30" />
+            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm h-24 resize-none focus:outline-none focus:border-[#6366F1]/30" />
           <div className="flex gap-3 items-center">
             <div className="flex gap-2">
               {['NORMAL', 'URGENT', 'CRITICAL'].map(p => (
                 <button key={p} type="button" onClick={() => setPriority(p)}
                   className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${
-                    priority === p ? (p === 'CRITICAL' ? 'bg-red-500/20 border-red-500/40 text-red-400' : p === 'URGENT' ? 'bg-yellow-500/20 border-yellow-500/40 text-yellow-400' : 'bg-green-500/20 border-green-500/40 text-green-400')
+                    priority === p ? (p === 'CRITICAL' ? 'bg-red-500/20 border-red-500/40 text-red-400' : p === 'URGENT' ? 'bg-yellow-500/20 border-yellow-500/40 text-yellow-400' : 'bg-indigo-500/20 border-indigo-500/40 text-indigo-400')
                     : 'bg-white/5 border-white/10 text-gray-400'
                   }`}>{p}</button>
               ))}
@@ -84,7 +84,7 @@ export default function AnnouncementsPage() {
           return (
             <motion.div key={a.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
               className={`glass-panel p-6 border-l-4 ${borderColor(a.priority)} flex gap-4`}>
-              <Icon className={`w-5 h-5 flex-shrink-0 mt-0.5 ${a.priority === 'CRITICAL' ? 'text-[#FF4444]' : a.priority === 'URGENT' ? 'text-[#FFB800]' : 'text-[#00FF88]'}`} />
+              <Icon className={`w-5 h-5 flex-shrink-0 mt-0.5 ${a.priority === 'CRITICAL' ? 'text-[#FF4444]' : a.priority === 'URGENT' ? 'text-[#FFB800]' : 'text-[#6366F1]'}`} />
               <div className="flex-1">
                 <div className="flex justify-between items-start">
                   <h3 className="text-white font-bold text-lg">{a.title}</h3>
