@@ -34,7 +34,7 @@ export default function AgentsPage() {
           <h2 className="font-heading text-2xl font-bold text-white mb-2">Volunteer Network</h2>
           <p className="text-gray-400 text-sm">Comprehensive directory of all deployed resources.</p>
         </div>
-        <div className="flex items-center gap-2 bg-[#00FF88]/10 border border-[#00FF88]/20 text-[#00FF88] px-4 py-2 rounded-xl text-sm font-semibold">
+        <div className="flex items-center gap-2 bg-[#6366F1]/10 border border-[#6366F1]/20 text-[#6366F1] px-4 py-2 rounded-xl text-sm font-semibold">
           <Users className="w-4 h-4" /> {agents.length || 0} Total Active
         </div>
       </div>
@@ -68,10 +68,10 @@ export default function AgentsPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05 }}
-                className="grid grid-cols-5 items-center p-4 rounded-xl hover:bg-white/5 border border-transparent hover:border-[rgba(0,255,136,0.1)] transition-colors cursor-pointer group"
+                className="grid grid-cols-5 items-center p-4 rounded-xl hover:bg-white/5 border border-transparent hover:border-[rgba(99,102,241,0.1)] transition-colors cursor-pointer group"
               >
-                <div className="col-span-1 font-mono text-sm text-[#00FF88] font-bold flex items-center gap-2">
-                  <Crosshair className="w-4 h-4 text-gray-500 group-hover:text-[#00FF88] transition-colors" />
+                <div className="col-span-1 font-mono text-sm text-[#6366F1] font-bold flex items-center gap-2">
+                  <Crosshair className="w-4 h-4 text-gray-500 group-hover:text-[#6366F1] transition-colors" />
                   {agent.id.slice(0, 5).toUpperCase()}
                 </div>
                 <div className="col-span-1 font-semibold text-white text-sm">{agent.name}</div>
@@ -79,7 +79,7 @@ export default function AgentsPage() {
                 <div className="col-span-1 text-gray-300 text-sm">{agent.location}</div>
                 <div className="col-span-1">
                   <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
-                    agent.status === 'Active' ? 'bg-[#00FF88]/10 text-[#00FF88] border border-[#00FF88]/20' :
+                    agent.status === 'Active' ? 'bg-[#6366F1]/10 text-[#6366F1] border border-[#6366F1]/20' :
                     agent.status === 'En-route' || agent.status === 'En-Route' ? 'bg-[#FFB800]/10 text-[#FFB800] border border-[#FFB800]/20' :
                     agent.status === 'Standby' ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' :
                     'bg-gray-500/10 text-gray-400 border border-gray-500/20'

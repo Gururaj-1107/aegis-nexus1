@@ -77,6 +77,25 @@ body {
 }
 
 /* ===========================
+   SECONDARY BUTTON (new)
+=========================== */
+.secondary-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+.secondary-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: var(--text-primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ===========================
    GRADIENT TEXT
 =========================== */
 .gradient-text {
@@ -131,18 +150,111 @@ body {
 }
 
 /* ===========================
+   STATUS BADGES (new)
+=========================== */
+.badge-success {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+.badge-warning {
+  background: rgba(255, 184, 0, 0.1);
+  border: 1px solid rgba(255, 184, 0, 0.2);
+  color: #FFB800;
+}
+.badge-danger {
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.2);
+  color: #FF4444;
+}
+.badge-info {
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #6366F1;
+}
+
+/* ===========================
+   SECTION DIVIDER (new)
+=========================== */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.22), transparent 80%);
+}
+
+/* ===========================
+   TOOLTIP STYLES (new)
+=========================== */
+.tooltip-dark {
+  background: #0A0E18 !important;
+  border: 1px solid rgba(99, 102, 241, 0.2) !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ===========================
+   INPUT STYLES (new)
+=========================== */
+.input-dark {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  transition: all 0.2s ease;
+}
+.input-dark:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+.input-dark::placeholder {
+  color: rgba(160, 173, 184, 0.5);
+}
+
+/* ===========================
+   SHIMMER LOADING (new)
+=========================== */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 12px;
+}
+
+/* ===========================
+   PULSE RING (new)
+=========================== */
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 0.3; }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+.pulse-ring {
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+/* ===========================
    SCROLLBAR
 =========================== */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #00FF88; border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: #00C4A7; }
+::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-secondary); }
 
 /* ===========================
    SELECTION
 =========================== */
 ::selection {
-  background: rgba(0, 255, 136, 0.3);
+  background: rgba(99, 102, 241, 0.3);
   color: #fff;
 }
 
@@ -158,33 +270,3 @@ body {
 /* Hide scrollbar utility */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* ===========================
-   OVERRIDES (normalize selectors)
-=========================== */
-::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-secondary); }
-
-/* Legacy selectors from earlier versions (keep in sync). */
-:::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 999px; }
-:::-webkit-scrollbar-thumb:hover { background: var(--accent-secondary); }
-
-::selection {
-  background: rgba(99, 102, 241, 0.3);
-  color: #fff;
-}
-
-/* Legacy selector from earlier versions (keep in sync). */
-:::selection {
-  background: rgba(99, 102, 241, 0.3);
-  color: #fff;
-}
-
-*:focus-visible {
-  outline: 2px solid rgba(99, 102, 241, 0.65);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-

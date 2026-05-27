@@ -6,7 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, L
 import { BarChart3, TrendingUp, PieChartIcon, Trophy } from 'lucide-react';
 import { apiFetch } from '@/lib/api';
 
-const COLORS = ['#00FF88', '#00C4A7', '#FFB800', '#FF4444', '#3b82f6', '#a855f7', '#f97316', '#06b6d4'];
+const COLORS = ['#6366F1', '#22D3EE', '#FFB800', '#FF4444', '#3b82f6', '#a855f7', '#f97316', '#818CF8'];
 
 export default function AnalyticsPage() {
   const [stats, setStats] = useState<any>(null);
@@ -40,7 +40,7 @@ export default function AnalyticsPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           className="glass-panel p-6">
           <div className="flex items-center gap-3 mb-6">
-            <BarChart3 className="w-5 h-5 text-[#00FF88]" />
+            <BarChart3 className="w-5 h-5 text-[#6366F1]" />
             <h3 className="font-heading font-bold text-lg text-white">Reports by Urgency</h3>
           </div>
           <div className="h-64">
@@ -48,7 +48,7 @@ export default function AnalyticsPage() {
               <BarChart data={urgencyData}>
                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#A0ADB8', fontSize: 12 }} />
                 <YAxis axisLine={false} tickLine={false} tick={{ fill: '#A0ADB8', fontSize: 12 }} />
-                <Tooltip contentStyle={{ background: '#0A0F0A', border: '1px solid rgba(0,255,136,0.2)', borderRadius: 12, color: '#fff' }} />
+                <Tooltip contentStyle={{ background: '#0A0E18', border: '1px solid rgba(99,102,241,0.2)', borderRadius: 12, color: '#fff' }} />
                 <Bar dataKey="count" radius={[8, 8, 0, 0]} barSize={50}>
                   {urgencyData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
                 </Bar>
@@ -61,7 +61,7 @@ export default function AnalyticsPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
           className="glass-panel p-6">
           <div className="flex items-center gap-3 mb-6">
-            <TrendingUp className="w-5 h-5 text-[#00C4A7]" />
+            <TrendingUp className="w-5 h-5 text-[#22D3EE]" />
             <h3 className="font-heading font-bold text-lg text-white">Reports Over Time (30 days)</h3>
           </div>
           <div className="h-64">
@@ -70,8 +70,8 @@ export default function AnalyticsPage() {
                 <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fill: '#A0ADB8', fontSize: 10 }}
                   tickFormatter={v => v.slice(5)} />
                 <YAxis axisLine={false} tickLine={false} tick={{ fill: '#A0ADB8', fontSize: 12 }} />
-                <Tooltip contentStyle={{ background: '#0A0F0A', border: '1px solid rgba(0,255,136,0.2)', borderRadius: 12, color: '#fff' }} />
-                <Line type="monotone" dataKey="count" stroke="#00FF88" strokeWidth={2} dot={{ fill: '#00FF88', r: 4 }} />
+                <Tooltip contentStyle={{ background: '#0A0E18', border: '1px solid rgba(99,102,241,0.2)', borderRadius: 12, color: '#fff' }} />
+                <Line type="monotone" dataKey="count" stroke="#6366F1" strokeWidth={2} dot={{ fill: '#6366F1', r: 4 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -90,7 +90,7 @@ export default function AnalyticsPage() {
                 <Pie data={skillDist} dataKey="count" nameKey="name" cx="50%" cy="50%" innerRadius={50} outerRadius={90} paddingAngle={3}>
                   {skillDist.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                 </Pie>
-                <Tooltip contentStyle={{ background: '#0A0F0A', border: '1px solid rgba(0,255,136,0.2)', borderRadius: 12, color: '#fff' }} />
+                <Tooltip contentStyle={{ background: '#0A0E18', border: '1px solid rgba(99,102,241,0.2)', borderRadius: 12, color: '#fff' }} />
               </PieChart>
             </ResponsiveContainer>
             <div className="flex-1 space-y-2">
@@ -122,7 +122,7 @@ export default function AnalyticsPage() {
                   <p className="text-sm font-semibold text-white truncate">{c.name}</p>
                   <p className="text-xs text-gray-500">{c.reports} reports · {c.dispatches} dispatches</p>
                 </div>
-                <span className="text-sm font-bold text-[#00FF88]">{c.total}</span>
+                <span className="text-sm font-bold text-[#6366F1]">{c.total}</span>
               </div>
             ))}
             {centers.length === 0 && <p className="text-gray-500 text-sm text-center py-8">No data available</p>}
